@@ -1,4 +1,4 @@
-package net.xpvp.www.worlddeleteplugin;
+package net.xpvp.www.worlddelete;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -7,9 +7,7 @@ import org.codehaus.plexus.util.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.logging.Level;
 
 public final class WorldDelete extends JavaPlugin {
@@ -35,7 +33,7 @@ public final class WorldDelete extends JavaPlugin {
                 deleteAllContents(worldFolder, worldName);
             } else {
                 for (Map.Entry<String, Object> entry : deleteSettings.entrySet()) {
-                    String name = entry.getKey();
+                    String name = entry.getKey().replace("__", ".");
                     boolean shouldDelete = Boolean.parseBoolean(entry.getValue().toString());
                     if (shouldDelete && !name.equals("delete-all")) {
                         deleteFile(new File(worldFolder, name), worldName);

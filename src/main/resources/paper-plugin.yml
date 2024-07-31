@@ -1,5 +1,5 @@
 name: world-delete-plugin
 version: '${project.version}'
-main: net.xpvp.www.worlddeleteplugin.WorldDelete
+main: net.xpvp.www.worlddelete.WorldDelete
 load: STARTUP
 api-version: '1.21'
