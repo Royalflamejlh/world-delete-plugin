@@ -1,9 +1,14 @@
 # Configuration for https://github.com/Royalflamejlh/world-delete-plugin
+settings:
+  # Delete early will try to delete the world folder before other plugins load
+  delete-early: true
+
 # List of all worlds that can be deleted
 worlds-to-delete:
   # Name of the world folder
   defaultWorld:
-    # Whether to delete the following folder / file for the world
+    delete-all: false  # Whether to delete all contents of the world folder
+    # If delete all is false the following choose which of the worlds folder's to delete
     advancements: true
     data: true
     datapacks: false
@@ -14,7 +19,9 @@ worlds-to-delete:
     level.dat: true
     paper-world.yml: false
     uid.dat: false
+
   anotherWorld:
+    delete-all: true  # Whether to delete all contents of the world folder
     advancements: true
     data: false
     datapacks: true
@@ -25,7 +32,9 @@ worlds-to-delete:
     level.dat: true
     paper-world.yml: true
     uid.dat: true
+
   yetAnotherWorld:
+    delete-all: false  # Whether to delete all contents of the world folder
     advancements: false
     data: true
     datapacks: true

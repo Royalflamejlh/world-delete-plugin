@@ -26,15 +26,32 @@ public final class WorldDelete extends JavaPlugin {
                 Bukkit.getLogger().log(Level.WARNING, "[WorldDelete] No world found with the name: " + worldName);
                 continue;
             }
+
             Bukkit.getLogger().log(Level.INFO, "[WorldDelete] Deleting world data for: " + worldName);
             Map<String, Object> deleteSettings = config.getConfigurationSection("worlds-to-delete." + worldName).getValues(false);
 
-            for (Map.Entry<String, Object> entry : deleteSettings.entrySet()) {
-                String name = entry.getKey();
-                boolean shouldDelete = Boolean.parseBoolean(entry.getValue().toString());
-                if (shouldDelete) {
-                    deleteFile(new File(worldFolder, name), worldName);
+            boolean deleteAll = Boolean.parseBoolean(deleteSettings.getOrDefault("delete-all", false).toString());
+            if (deleteAll) {
+                deleteAllContents(worldFolder, worldName);
+            } else {
+                for (Map.Entry<String, Object> entry : deleteSettings.entrySet()) {
+                    String name = entry.getKey();
+                    boolean shouldDelete = Boolean.parseBoolean(entry.getValue().toString());
+                    if (shouldDelete && !name.equals("delete-all")) {
+                        deleteFile(new File(worldFolder, name), worldName);
+                    }
                 }
+            }
+        }
+    }
+
+    private void deleteAllContents(File folder, String worldName) {
+        for (File file : folder.listFiles()) {
+            try {
+                FileUtils.forceDelete(file);
+                Bukkit.getLogger().log(Level.INFO, "[WorldDelete] Deleted file/folder: " + file.getName() + " for world: " + worldName);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }
