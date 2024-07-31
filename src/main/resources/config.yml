@@ -1,0 +1,38 @@
+# Configuration for https://github.com/Royalflamejlh/world-delete-plugin
+# List of all worlds that can be deleted
+worlds-to-delete:
+  # Name of the world folder
+  defaultWorld:
+    # Whether to delete the following folder / file for the world
+    advancements: true
+    data: true
+    datapacks: false
+    entities: true
+    poi: true
+    region: true
+    stats: true
+    level.dat: true
+    paper-world.yml: false
+    uid.dat: false
+  anotherWorld:
+    advancements: true
+    data: false
+    datapacks: true
+    entities: false
+    poi: true
+    region: false
+    stats: true
+    level.dat: true
+    paper-world.yml: true
+    uid.dat: true
+  yetAnotherWorld:
+    advancements: false
+    data: true
+    datapacks: true
+    entities: true
+    poi: false
+    region: true
+    stats: false
+    level.dat: false
+    paper-world.yml: false
+    uid.dat: true
